@@ -39,6 +39,9 @@ function select() {
 
         document.getElementById('allIn').classList.add('hideTop');
         document.getElementById('selectSide').classList.remove('hideBottom');
+
+        document.querySelector('.item1').classList.remove('hide');
+        document.querySelector('#divider1').classList.remove('hide');
     }
     catch (exception) {
         alert(exception);
@@ -46,8 +49,18 @@ function select() {
 }
 
 function returnToStart() {
-    document.getElementById('allIn').classList.remove('hideTop');
-    document.getElementById('selectSide').classList.add('hideBottom');
+    document.querySelector('#allOut').classList.add('hideBottom');
+    document.querySelector('#selectSide').classList.remove('hideTop');
+    document.querySelector('#selectSide').classList.add('hideBottom');
+    document.querySelector('#allIn').classList.remove('hideTop');
+    document.querySelector('.menu').classList.remove('open');
+    document.querySelector('.item2').classList.remove('hide');
+    document.querySelector('#divider1').classList.remove('hide');
+    document.querySelector('#divider2').classList.remove('hide');
+    document.querySelector('.item1').classList.add('hide');
+    document.querySelector('.item2').classList.add('hide');
+    document.querySelector('#divider1').classList.add('hide');
+    document.querySelector('#divider2').classList.add('hide');
 }
 
 function convertCoordinates(lat, lon) {
@@ -366,6 +379,9 @@ function generate() {
             document.querySelector('#selectSide').classList.add('hideTop');
             document.querySelector('.output-p').innerHTML = output;
             document.querySelector('#allOut').classList.remove('hideBottom');
+            document.querySelector('.item2').classList.remove('hide');
+            document.querySelector('#divider2').classList.remove('hide');
+            document.querySelector('#divider1').classList.add('hide');
             calcWidth();
         }
         catch (exception) {
@@ -381,6 +397,9 @@ function returnToSide() {
     document.querySelector('#allOut').classList.add('hideBottom');
     document.querySelector('#selectSide').classList.remove('hideTop');
     document.querySelector('.menu').classList.remove('open');
+    document.querySelector('.item2').classList.add('hide');
+    document.querySelector('#divider2').classList.add('hide');
+    document.querySelector('#divider1').classList.remove('hide');
 }
 
 function PointAtPoint(latOne, lonOne, distance, bearing) {
