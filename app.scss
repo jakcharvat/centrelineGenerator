@@ -1,2 +1,241 @@
+$mdc-theme-primary: #303f9f; //6200EE
+$mdc-theme-on-primary: #ffffff;
+$mdc-theme-secondary: #ffa726;
+$mdc-theme-on-secondary: #FFFFFF;
+
 @import '@material/textfield/mdc-text-field';
 @import '@material/button/mdc-button';
+@import '@material/select/mdc-select';
+@import '@material/typography/mdc-typography';
+@import '@material/icon-button/mdc-icon-button';
+@import '@material/top-app-bar/mdc-top-app-bar';
+@import '@material/list/mdc-list';
+
+html {
+    --dist-from-side--25: 25%;
+    --dist-from-side--35: 35%;
+    --dist-from-side--36: 36%;
+    --screen-height: 100%;
+    --two-screen-height: 200%;
+}
+
+body {
+    overflow: hidden;
+}
+body.autoScroll {
+    overflow: auto;
+}
+
+.button-container {
+    margin-top: 10px;
+}
+
+#allIn {
+    position: absolute;
+    left: var(--dist-from-side--35);
+    top: 5%;
+    width: 30%;
+    min-width: 456px;
+    height: 34%;
+    min-height: 240px;
+    @include mdc-elevation(16);
+    border-radius: 40px;
+    transition: all 1s ease;
+    background-color: white;
+    z-index: 1;
+}
+
+#allIn.hideTop {
+    top: -32%;
+}
+
+#allIn.hideBottom {
+    top: 100%;
+}
+
+#content {
+    position: relative;
+    left: 5%;
+    width: 90%;
+    top: 5%;
+    height: 90%;
+}
+
+#content-out {
+    position: relative;
+    left: 2%;
+    width: 96%;
+    top: 5%;
+    height: 90%;
+    text-align: center;
+    overflow-y: scroll;
+}
+
+.mdc-text-field {
+    width: 100%;
+    border-radius: 100px;
+    @include mdc-text-field-ink-color(primary);
+    @include mdc-text-field-label-color(secondary);
+    @include mdc-text-field-line-ripple-color(primary);
+    @include mdc-text-field-bottom-line-color(secondary);
+    @include mdc-text-field-hover-bottom-line-color(secondary);
+}
+
+.mdc-button {
+    border-radius: 100px;
+    @include mdc-button-ink-color(secondary);
+    @include mdc-button-outline-color(secondary);
+    @include mdc-states-base-color(secondary);
+}
+
+#selectSide {
+    position: absolute;
+    left: var(--dist-from-side--35);
+    top: 10%;
+    width: 30%;
+    min-width: 456px;
+    height: 20%;
+    min-height: 140px;
+    @include mdc-elevation(16);
+    border-radius: 40px;
+    transition: all 1s ease;
+    background-color: white;
+}
+
+#selectSide.hideBottom {
+    top: 100%;
+}
+
+#selectSide.hideTop {
+    top: -16%;
+    @include mdc-elevation(10);
+    z-index: 0;
+    width: 28%;
+    left: var(--dist-from-side--36);
+    min-width: 430px;
+}
+
+.mdc-select {
+    width: 100%;
+    border-radius: 100px;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    @include mdc-select-ink-color(primary);
+    @include mdc-select-label-color(secondary);
+    @include mdc-select-focused-label-color(secondary);
+    @include mdc-select-bottom-line-color(secondary);
+    @include mdc-select-hover-bottom-line-color(secondary);
+    @include mdc-select-focused-bottom-line-color(secondary);
+}
+
+.returnStartButton {
+    float: right;
+}
+
+#allOut {
+    position: absolute;
+    min-width: 768px;
+    width: 50%;
+    left: var(--dist-from-side--25);
+    top: 10%;
+    height: 80%;
+    background-color: white;
+    @include mdc-elevation(16);
+    border-radius: 40px;
+    z-index: 2;
+    transition: all 1s ease;
+}
+
+#allOut.hideBottom {
+    top: 100%;
+}
+
+.returnSelectButton {
+    position: absolute;
+    right: 10px;
+    left: auto;
+    bottom: 10px;
+    top: auto;
+}
+
+.overflowAuto {
+    overflow-x: scroll;
+}
+
+.output-p.alignLeft {
+    text-align: left;
+}
+
+.output-p.alignLeft ~ #allOut {
+    width: auto;
+}
+
+.menu--not {
+    z-index: 3;
+    position: fixed;
+    height: 100%;
+    width: 0;
+    top: 0;
+    left: 0;
+    transition: background-color .5s ease;
+}
+
+.menu.open~.menu--not {
+    width: 100%;
+    background-color: rgba($color: #000000, $alpha: 0.3);
+}
+
+.menu {
+    overflow: auto;
+    z-index: 4;
+    background-color: $mdc-theme-secondary;
+    width: 300px;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: -500px;
+    transition: all .5s ease;
+}
+
+.menu.open {
+    left: 0;
+    @include mdc-elevation(24);
+}
+
+.menu-button {
+    z-index: 5;
+}
+
+.github-icon {
+    width: 100%;
+}
+
+.jakcharvat-logo {
+    position: relative;
+    top: 20px;
+    left: 10%;
+    width: 80%;
+}
+
+.mdc-list {
+    margin: 20px 5px auto 5px;
+}
+
+.mdc-list-item {
+    border-radius: 6px;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.item {
+    color: $mdc-theme-on-primary;
+}
+
+.mdc-list-divider {
+    @include mdc-theme-prop(border-bottom-color, primary);
+    width: 50%;
+    margin: 0 auto;
+    border-bottom-width: 2px;
+    position: relative;
+    top: -5px;
+}

@@ -1,26 +1,82 @@
 <html>
 <head>
     <link rel="stylesheet" href="bundle.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="hamburgers.css" rel="stylesheet">
     <script src="bundle.js" async></script>
     <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript" src="js/window.js"></script>
 </head>
-<body>
-    <div id="allIn">
-        <div class="rwyOne mdc-text-field mdc-text-field--box">
-            <input type="text" id="rwyEndOne" class="mdc-text-field__input">
-            <label for="rwyEndOne" class="mdc-floating-label">Runway End One</label>
-            <div class="mdc-line-ripple"></div>
+<body id="thatAll">
+
+    <header class="mdc-top-app-bar mdc-top-app-bar--short mdc-top-app-bar--short-collapsed mdc-top-app-bar--fixed">
+        <div class="mdc-top-app-bar__row">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                <button class="mdc-icon-button material-icons menu-button" onclick="toggleMenu()"><i class="material-icons">menu</i></button>
+            </section>
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+                <a href="https://github.com/jakcharvat" class="material-icons mdc-top-app-bar__action-item github-link" aria-label="Bookmark this page" alt="Bookmark this page"><img class="github-icon" src="icons/github.png"></a>
+            </section>
         </div>
-        <br />
-        <div class="rwyTwo mdc-text-field mdc-text-field--box">
-            <input type="text" id="rwyEndTwo" class="mdc-text-field__input">
-            <label for="rwyEndTwo" class="mdc-floating-label">Runway End Two</label>
-            <div class="mdc-line-ripple"></div>
+    </header>
+
+    <div class="menu">
+        <div class="menu-content">
+            <div class="jakcharvat-logo">
+                <img src="icons/jakcharvat-logo--white.svg">
+            </div>
+            <ul class="mdc-list">
+                <a class="mdc-list-item mdc-typography--overline item1"><p class="item">Runway definition</p></a>
+                <a class="mdc-list-item mdc-typography--overline item2" onclick="returnToSide()"><p class="item">Side selection</p></a>
+                <li id="divider" role="separator" class="mdc-list-divider"></li>
+            </ul>
         </div>
-        <br />
-        <button class="mdc-button mdc-button--outlined" onclick="generate()">
-            Generate
-        </button>
+    </div>
+    <div class="menu--not" onclick="toggleMenu()"></div>
+    
+    <div id="allIn" class="hideBottom">
+        <div id="content" class="allIn--content">
+            <div class="rwyOne mdc-text-field mdc-text-field--box">
+                <input type="text" id="rwyEndOne" class="mdc-text-field__input">
+                <label for="rwyEndOne" class="mdc-floating-label">Runway End One</label>
+                <div class="mdc-line-ripple"></div>
+            </div>
+            <br />
+            <div class="rwyTwo mdc-text-field mdc-text-field--box">
+                <input type="text" id="rwyEndTwo" class="mdc-text-field__input">
+                <label for="rwyEndTwo" class="mdc-floating-label">Runway End Two</label>
+                <div class="mdc-line-ripple"></div>
+            </div>
+            <br />
+            <div class="button-container">
+                <button class="mdc-button mdc-button--outlined continueButton" onclick="select()">
+                    Continue
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="selectSide" class="hideBottom">
+        <div id="content">
+            <div class="mdc-select mdc-select--box">
+                <select class="mdc-select__native-control" id="sideSelector">
+                    <option value="" disabled selected></option>
+                </select>
+                <label class="mdc-floating-label">What side should the 5nm increments be?</label>
+                <div class="mdc-line-ripple"></div>
+            </div>
+            <button class="mdc-button mdc-button--outlined generateButton" onclick="generate()">
+                Generate
+            </button>
+        </div>
+    </div>
+    <div id="allOut" class="hideBottom">
+        <div id="content-out">
+            <p class="mdc-typography--caption output-p">Output</p>
+        </div>
+        <!-- <button class="mdc-button mdc-button--outlined returnSelectButton" onclick="returnToSide()">
+            Side selection
+        </button> -->
     </div>
 </body>
 </html>
