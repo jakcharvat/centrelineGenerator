@@ -1,0 +1,256 @@
+$mdc-theme-primary: #FFCF44;
+$mdc-theme-on-primary: #42424d;
+$mdc-theme-secondary: #FFCF44;
+$mdc-theme-on-secondary: #33333D;
+$mdc-theme-surface: #42424d;
+$mdc-theme-on-surface: #FFFFFF;
+$mdc-theme-background: #33333D;
+$mdc-theme-on-background: #FFFFFF;
+
+@import '@material/textfield/mdc-text-field';
+@import '@material/button/mdc-button';
+@import '@material/select/mdc-select';
+@import '@material/typography/mdc-typography';
+@import '@material/icon-button/mdc-icon-button';
+@import '@material/top-app-bar/mdc-top-app-bar';
+@import '@material/list/mdc-list';
+@import '@material/card/mdc-card';
+
+html {
+    --dist-from-side--25: 25%;
+    --dist-from-side--35: 35%;
+    --dist-from-side--36: 36%;
+    --screen-height: 100%;
+    --two-screen-height: 200%;
+}
+
+body {
+    overflow: hidden;
+    background-color: $mdc-theme-background;
+    color: $mdc-theme-on-background;
+}
+body.autoScroll {
+    overflow: auto;
+}
+
+.button-container {
+    margin-top: 15px;
+}
+
+.mdc-button {
+    float: right;
+}
+
+#allIn {
+    position: absolute;
+    left: var(--dist-from-side--35);
+    top: 5%;
+    width: 30%;
+    min-width: 456px;
+    height: 215px;
+    z-index: 1;
+}
+
+.mdc-card {
+    @include mdc-elevation(16);
+    transition: all 1s ease;
+}
+
+#allIn.hideTop {
+    top: -200px;
+}
+
+#allIn.hideBottom {
+    top: 100%;
+}
+
+#content {
+    position: relative;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    margin-bottom: 20px;
+}
+
+#content-out {
+    position: relative;
+    left: 2%;
+    width: 96%;
+    top: 5%;
+    height: 90%;
+    text-align: center;
+    overflow-y: scroll;
+}
+
+.mdc-text-field {
+    width: 100%;
+}
+
+#selectSide {
+    position: absolute;
+    left: var(--dist-from-side--35);
+    top: 10%;
+    width: 30%;
+    min-width: 456px;
+    height: 133px;
+}
+
+#selectSide.hideBottom {
+    top: 100%;
+}
+
+#selectSide.hideTop {
+    top: -105px;
+    @include mdc-elevation(10);
+    z-index: 0;
+    width: 28%;
+    left: var(--dist-from-side--36);
+    min-width: 430px;
+}
+
+.mdc-select {
+    width: 100%;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+.returnStartButton {
+    float: right;
+}
+
+option {
+    background-color: #52515e;
+    color: $mdc-theme-primary;
+}
+
+#allOut {
+    position: absolute;
+    min-width: 768px;
+    width: 50%;
+    left: var(--dist-from-side--25);
+    top: 50px;
+    height: auto;
+    bottom: 30px;
+    z-index: 2;
+    color: $mdc-theme-primary;
+}
+
+#allOut.hideBottom {
+    top: 100%;
+    bottom: 0;
+}
+
+.returnSelectButton {
+    position: absolute;
+    right: 10px;
+    left: auto;
+    bottom: 10px;
+    top: auto;
+}
+
+.overflowAuto {
+    overflow-x: scroll;
+}
+
+.output-p:hover {
+    overflow: visible;
+}
+
+.menu--not {
+    z-index: 3;
+    position: fixed;
+    height: 100%;
+    width: 0;
+    top: 0;
+    left: 0;
+    transition: background-color .5s ease;
+}
+
+.menu.open~.menu--not {
+    width: 100%;
+    background-color: rgba($color: #000000, $alpha: 0.3);
+}
+
+.menu {
+    overflow: auto;
+    z-index: 4;
+    background-color: $mdc-theme-secondary;
+    width: 300px;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: -500px;
+    transition: all .5s ease;
+}
+
+.menu.open {
+    left: 0;
+    @include mdc-elevation(24);
+}
+
+.menu-button {
+    @include mdc-icon-button-ink-color(on-primary);
+}
+
+.back-button {
+    @include mdc-icon-button-ink-color(on-secondary);
+}
+
+.github-icon {
+    width: 100%;
+}
+
+.jakcharvat-logo {
+    position: relative;
+    top: 20px;
+    left: 10%;
+    width: 80%;
+}
+
+.mdc-list {
+    margin: 20px 5px auto 5px;
+}
+
+.mdc-list-item {
+    border-radius: 6px;
+    justify-content: center;
+    cursor: pointer;
+    color: $mdc-theme-on-secondary;
+}
+
+.mdc-list-item.hide {
+    display: none;
+}
+
+.item {
+    color: $mdc-theme-on-secondary;
+}
+
+.mdc-list-divider {
+    @include mdc-theme-prop(border-bottom-color, on-primary);
+    width: 50%;
+    margin: 0 auto;
+    border-bottom-width: 2px;
+    position: relative;
+    top: -5px;
+}
+
+#divider1.hide {
+    display: none;
+}
+
+#divider2.hide {
+    display: none;
+}
+
+.back-button {
+    position: absolute;
+}
+
+.mdc-text-field__input {
+    height: 100%;
+}
+
+.material-icons {
+    color: $mdc-theme-on-secondary;
+}
