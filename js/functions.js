@@ -8,8 +8,8 @@ var lonTwo = "";
 
 function select() {
     try {
-        var coordOne = '["N50d06m06.61", "E14d13m34.68", "1202ft"]'; /*document.getElementById("rwyEndOne").value;*/
-        var coordTwo = '["N50d06m57.42", "E14d16m24.12", "1158ft"]'; /*document.getElementById("rwyEndTwo").value;*/
+        var coordOne = document.querySelector("#rwyEndOne").value;
+        var coordTwo = document.querySelector("#rwyEndTwo").value;
 
         coordOne = coordOne.replace(/"/g, "").replace(/ /g, "").replace("[", "").replace("]", "").replace(/N/g, "").replace(/E/g, "").replace(/S/g, "-").replace(/W/g, "-");
         coordTwo = coordTwo.replace(/"/g, "").replace(/ /g, "").replace("[", "").replace("]", "").replace(/N/g, "").replace(/E/g, "").replace(/S/g, "-").replace(/W/g, "-");
@@ -42,25 +42,13 @@ function select() {
 
         document.querySelector('.item1').classList.remove('hide');
         document.querySelector('#divider1').classList.remove('hide');
+
+        document.querySelector('#sideSelector').value = '';
+        document.querySelector('.generateButton').setAttribute('disabled', true);
     }
     catch (exception) {
         alert(exception);
     }
-}
-
-function returnToStart() {
-    document.querySelector('#allOut').classList.add('hideBottom');
-    document.querySelector('#selectSide').classList.remove('hideTop');
-    document.querySelector('#selectSide').classList.add('hideBottom');
-    document.querySelector('#allIn').classList.remove('hideTop');
-    document.querySelector('.menu').classList.remove('open');
-    document.querySelector('.item2').classList.remove('hide');
-    document.querySelector('#divider1').classList.remove('hide');
-    document.querySelector('#divider2').classList.remove('hide');
-    document.querySelector('.item1').classList.add('hide');
-    document.querySelector('.item2').classList.add('hide');
-    document.querySelector('#divider1').classList.add('hide');
-    document.querySelector('#divider2').classList.add('hide');
 }
 
 function convertCoordinates(lat, lon) {
@@ -286,9 +274,40 @@ function addOptions(bearingOne, bearingTwo) {
 }
 
 function generate() {
+    var perpendicularityChange = 90;
     var selectField = document.querySelector('#sideSelector');
     var sideChosen = selectField.options[selectField.selectedIndex].value;
+    var doBoth = true;
+
+    if (parseFloat(bearingOne) > parseFloat(bearingTwo)) {
+        var bearingOneSave = bearingOne;
+        bearingOne = bearingTwo;
+        bearingTwo = bearingOneSave;
+
+        var pointSave = [latOne, lonOne, latTwo, lonTwo];
+        latOne = pointSave[3];
+        lonOne = pointSave[4];
+        latTwo = pointSave[1];
+        lonTwo = pointSave[2];
+    }
     console.log(sideChosen);
+
+    if (sideChosen == 'North-West' || sideChosen == 'North' || sideChosen == 'North-East') {
+        perpendicularityChange = -90;
+    }
+
+    if (sideChosen == 'West' && bearingOne < 30) {
+        perpendicularityBearing = -90;
+    }
+
+    if (sideChosen == 'East' && bearingOne >= 150 && bearingOne <= 180) {
+        perpendicularityBearing = -90;
+    }
+
+    if (sideChosen != 'Both') {
+        doBoth = false;
+    }
+
     if (sideChosen != "") {
         try {
             output = "";
@@ -314,20 +333,37 @@ function generate() {
 
                     count++;
                 }
-                var perpendicularityPoint = point;
-                var perpendicularityBearing = parseFloat(bearingTwo) + 90;
 
-                if (perpendicularityBearing > 360) {
-                    perpendicularityBearing = perpendicularityBearing - 360;
+                if (doBoth == true) {
+                    var perpendicularityPoint = point;
+                    var perpendicularityBearing = parseFloat(bearingTwo) + 90;
+
+                    if (perpendicularityBearing > 360) {
+                        perpendicularityBearing = perpendicularityBearing - 360;
+                    }
+
+                    var inversePerpendicularityBearing = perpendicularityBearing + 180;
+                    if (inversePerpendicularityBearing > 360) {
+                        inversePerpendicularityBearing = inversePerpendicularityBearing - 360;
+                    }
+
+                    perpendicularityPoint = PointAtPoint(perpendicularityPoint[0], perpendicularityPoint[1], halfNM, perpendicularityBearing);
+                    var perpendicularityPointTwo = PointAtPoint(perpendicularityPoint[0], perpendicularityPoint[1], oneNM, inversePerpendicularityBearing);
                 }
+                else {
+                    var perpendicularityPoint = point;
+                    var perpendicularityBearing = parseFloat(bearingTwo) - perpendicularityChange;
 
-                var inversePerpendicularityBearing = perpendicularityBearing + 180;
-                if (inversePerpendicularityBearing > 360) {
-                    inversePerpendicularityBearing = inversePerpendicularityBearing - 360;
+                    if (perpendicularityBearing > 360) {
+                        perpendicularityBearing = perpendicularityBearing - 360;
+                    }
+
+                    var inversePerpendicularityBearing = perpendicularityBearing + 180;
+                    if (inversePerpendicularityBearing > 360) {
+                        inversePerpendicularityBearing = inversePerpendicularityBearing - 360;
+                    }
+                    var perpendicularityPointTwo = PointAtPoint(perpendicularityPoint[0], perpendicularityPoint[1], halfNM, perpendicularityBearing);
                 }
-
-                perpendicularityPoint = PointAtPoint(perpendicularityPoint[0], perpendicularityPoint[1], halfNM, perpendicularityBearing);
-                var perpendicularityPointTwo = PointAtPoint(perpendicularityPoint[0], perpendicularityPoint[1], oneNM, inversePerpendicularityBearing);
 
                 output += "[" + perpendicularityPoint[0] + "," + perpendicularityPoint[1] + "," + perpendicularityPointTwo[0] + "," + perpendicularityPointTwo[1] + "],<br/>";
 
@@ -352,20 +388,37 @@ function generate() {
 
                     count++;
                 }
-                var perpendicularityPoint = point;
 
-                var perpendicularityBearing = parseFloat(bearingOne) + 90;
-                if (perpendicularityBearing > 360) {
-                    perpendicularityBearing = perpendicularityBearing - 360;
+                if (doBoth == true) {
+                    var perpendicularityPoint = point;
+                    var perpendicularityBearing = parseFloat(bearingOne) + 90;
+
+                    if (perpendicularityBearing > 360) {
+                        perpendicularityBearing = perpendicularityBearing - 360;
+                    }
+
+                    var inversePerpendicularityBearing = perpendicularityBearing + 180;
+                    if (inversePerpendicularityBearing > 360) {
+                        inversePerpendicularityBearing = inversePerpendicularityBearing - 360;
+                    }
+
+                    perpendicularityPoint = PointAtPoint(perpendicularityPoint[0], perpendicularityPoint[1], halfNM, perpendicularityBearing);
+                    var perpendicularityPointTwo = PointAtPoint(perpendicularityPoint[0], perpendicularityPoint[1], oneNM, inversePerpendicularityBearing);
                 }
+                else {
+                    var perpendicularityPoint = point;
+                    var perpendicularityBearing = parseFloat(bearingOne) + perpendicularityChange;
 
-                var inversePerpendicularityBearing = perpendicularityBearing + 180;
-                if (inversePerpendicularityBearing > 360) {
-                    inversePerpendicularityBearing = inversePerpendicularityBearing - 360;
+                    if (perpendicularityBearing < 0) {
+                        perpendicularityBearing = 360 - Math.abs(perpendicularityBearing);
+                    }
+
+                    var inversePerpendicularityBearing = perpendicularityBearing + 180;
+                    if (inversePerpendicularityBearing > 360) {
+                        inversePerpendicularityBearing = inversePerpendicularityBearing - 360;
+                    }
+                    var perpendicularityPointTwo = PointAtPoint(perpendicularityPoint[0], perpendicularityPoint[1], halfNM, perpendicularityBearing);
                 }
-
-                perpendicularityPoint = PointAtPoint(perpendicularityPoint[0], perpendicularityPoint[1], halfNM, perpendicularityBearing);
-                var perpendicularityPointTwo = PointAtPoint(perpendicularityPoint[0], perpendicularityPoint[1], oneNM, inversePerpendicularityBearing);
 
                 if (outsideCount == 4) {
                     output += "[" + perpendicularityPoint[0] + "," + perpendicularityPoint[1] + "," + perpendicularityPointTwo[0] + "," + perpendicularityPointTwo[1] + "]";
@@ -380,8 +433,8 @@ function generate() {
             document.querySelector('.output-p').innerHTML = output;
             document.querySelector('#allOut').classList.remove('hideBottom');
             document.querySelector('.item2').classList.remove('hide');
-            document.querySelector('#divider2').classList.remove('hide');
             document.querySelector('#divider1').classList.add('hide');
+            document.querySelector('#divider2').classList.remove('hide');
             calcWidth();
         }
         catch (exception) {
@@ -391,15 +444,6 @@ function generate() {
     else {
         alert('You must pick a valid option');
     }
-}
-
-function returnToSide() {
-    document.querySelector('#allOut').classList.add('hideBottom');
-    document.querySelector('#selectSide').classList.remove('hideTop');
-    document.querySelector('.menu').classList.remove('open');
-    document.querySelector('.item2').classList.add('hide');
-    document.querySelector('#divider2').classList.add('hide');
-    document.querySelector('#divider1').classList.remove('hide');
 }
 
 function PointAtPoint(latOne, lonOne, distance, bearing) {

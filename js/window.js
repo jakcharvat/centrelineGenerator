@@ -100,7 +100,7 @@ function calcWidth36(width) {
 /*---------------------------------------------------------------------*/
 
 
-/*------------Toggle hamburger menu to cross and back------------*/
+/*------------Toggle menu to close and back------------*/
 
 function toggleMenu() {
     var menu = document.querySelector('.menu');
@@ -113,3 +113,87 @@ function toggleMenu() {
 }
 
 /*---------------------------------------------------------------*/
+
+
+/*------------Defining menu actions------------*/
+
+function returnToStart() {
+    document.querySelector('#allOut').classList.add('hideBottom');
+    document.querySelector('#selectSide').classList.remove('hideTop');
+    document.querySelector('#selectSide').classList.add('hideBottom');
+    document.querySelector('#allIn').classList.remove('hideTop');
+    document.querySelector('.menu').classList.remove('open');
+    document.querySelector('.item2').classList.remove('hide');
+    document.querySelector('#divider1').classList.remove('hide');
+    document.querySelector('#divider2').classList.remove('hide');
+    document.querySelector('.item1').classList.add('hide');
+    document.querySelector('.item2').classList.add('hide');
+    document.querySelector('#divider1').classList.add('hide');
+    document.querySelector('#divider2').classList.add('hide');
+}
+
+function returnToSide() {
+    document.querySelector('#allOut').classList.add('hideBottom');
+    document.querySelector('#selectSide').classList.remove('hideTop');
+    document.querySelector('.menu').classList.remove('open');
+    document.querySelector('.item2').classList.add('hide');
+    document.querySelector('#divider1').classList.remove('hide');
+    document.querySelector('#divider2').classList.add('hide');
+}
+
+/*---------------------------------------------*/
+
+/*------------Scrollbars------------*/
+
+function scroll() {
+    
+    var scrolled = document.querySelector('#content-out');
+    var a = scrolled.scrollTop;
+    var b = scrolled.scrollHeight - scrolled.clientHeight;
+    var c = a / b;
+
+    console.log(c);
+}
+
+/*----------------------------------*/
+
+/*------------Select Button Enable / Disable------------*/
+
+var buttonOne = false;
+var buttonTwo = false;
+
+function enableButtonOne() {
+    buttonOne = true;
+    checkButtons();
+}
+
+function disableButtonOne() {
+    if (document.querySelector('#rwyEndOne').value == "") {
+        buttonOne = false;
+    }
+    checkButtons();
+}
+
+function enableButtonTwo() {
+    buttonTwo = true;
+    checkButtons();
+}
+
+function disableButtonTwo() {
+    if (document.querySelector('#rwyEndTwo').value == "") {
+        buttonTwo = false;
+    }
+    checkButtons();
+}
+
+function checkButtons() {
+    if (buttonOne == true && buttonTwo == true) {
+        document.querySelector('.continueButton').removeAttribute('disabled');
+    }
+
+    else {
+        document.querySelector('.continueButton').setAttribute('disabled', true);
+    }
+}
+
+/*------------------------------------------------------*/
