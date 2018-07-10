@@ -1,106 +1,42 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="bundle.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="bundle.js" async></script>
-    <script type="text/javascript" src="js/functions.js"></script>
-    <script type="text/javascript" src="js/window.js"></script>
-    <title>CentreLine Generator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CentreLine Maker</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/main.js"></script>
 </head>
-<body id="thatAll">
-
-    <header class="mdc-top-app-bar mdc-top-app-bar--short mdc-top-app-bar--short-collapsed mdc-top-app-bar--fixed">
-        <div class="mdc-top-app-bar__row">
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                <button class="mdc-icon-button material-icons menu-button" onclick="toggleMenu()"><i class="material-icons">menu</i></button>
-            </section>
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-                <a href="https://github.com/jakcharvat" class="material-icons mdc-top-app-bar__action-item github-link" aria-label="Bookmark this page" alt="Bookmark this page"><img class="github-icon" src="icons/github--black.png"></a>
-            </section>
-        </div>
-    </header>
-
-    <div class="menu">
-        <button class="mdc-icon-button material-icons back-button" onclick="toggleMenu()"><i class="material-icons">arrow_back</i></button>
-        <div class="menu-content">
-            <div class="jakcharvat-logo">
-                <img src="icons/jakcharvat-logo--black.svg">
-            </div>
-            <ul class="mdc-list">
-                <a class="mdc-list-item mdc-typography--overline item1 hide" onclick="returnToStart()">
-                    <p class="item">Runway definition</p>
-                    <i class="material-icons mdc-list-item__meta">home</i>
-                </a>
-                <li id="divider1" role="separator" class="mdc-list-divider hide"></li>
-                <a class="mdc-list-item mdc-typography--overline item2 hide" onclick="returnToSide()">
-                    <p class="item">Side selection</p>
-                    <i class="material-icons mdc-list-item__meta">keyboard_arrow_up</i>
-                </a>
-                <li id="divider2" role="separator" class="mdc-list-divider hide"></li>
-                <a class="mdc-list-item mdc-typography--overline item3" href="https://github.com/jakcharvat/" target="_blank" onclick="toggleMenu()">
-                    <p class="item">My Projects on Github</p>
-                    <i class="material-icons mdc-list-item__meta">open_in_new</i>
-                </a>
-                <a class="mdc-list-item mdc-typography--overline item4" href="https://github.com/jakcharvat/centrelineGenerator/" target="_blank" onclick="toggleMenu()">
-                    <p class="item">This Project on Github</p>
-                    <i class="material-icons mdc-list-item__meta">open_in_new</i>
-                </a>
-                <a class="mdc-list-item mdc-typography--overline item5" href="https://openscope.co" target="_blank" onclick="toggleMenu()">
-                    <p class="item">OpenScope</p>
-                    <i class="material-icons mdc-list-item__meta">open_in_new</i>
-                </a>
-                <a class="mdc-list-item mdc-typography--overline item6" href="https://github.com/openscope/openscope/" target="_blank" onclick="toggleMenu()">
-                    <p class="item">OpenScope on Github</p>
-                    <i class="material-icons mdc-list-item__meta">open_in_new</i>
-                </a>
-            </ul>
-        </div>
-    </div>
-    <div class="menu--not" onclick="toggleMenu()"></div>
-    
-    <div id="allIn" class="mdc-card hideBottom">
-        <div id="content" class="allIn--content">
-            <div class="rwyOne mdc-text-field">
-                <input type="text" id="rwyEndOne" class="mdc-text-field__input" oninput="enableButtonOne()" onkeyup="disableButtonOne()">
-                <label for="rwyEndOne" class="mdc-floating-label">Runway End One</label>
-                <div class="mdc-line-ripple"></div>
-            </div>
-            <br />
-            <div class="rwyTwo mdc-text-field">
-                <input type="text" id="rwyEndTwo" class="mdc-text-field__input" oninput="enableButtonTwo()" onkeyup="disableButtonTwo()" on>
-                <label for="rwyEndTwo" class="mdc-floating-label">Runway End Two</label>
-                <div class="mdc-line-ripple"></div>
-            </div>
-            <br />
-            <div class="button-container">
-                <button class="mdc-button mdc-button--raised continueButton" onclick="select()" disabled>
-                    Continue
-                </button>
-            </div>
-        </div>
-    </div>
-    <div id="selectSide" class="mdc-card hideBottom">
+<body>
+    <div id="allIn">
         <div id="content">
-            <div class="mdc-select">
-                <select class="mdc-select__native-control" id="sideSelector">
-                    <option value="" disabled selected></option>
-                </select>
-                <label class="mdc-floating-label">What side should the 5nm increments be?</label>
-                <div class="mdc-line-ripple"></div>
+            <div class="group">
+                <input type="text" name="" class="in" id="rwyEndOne" required oninput="validateOne()">
+                    <span class="bar"></span>
+                    <label id="labelOne">Rwy End One</label>
             </div>
-            <button class="mdc-button mdc-button--raised generateButton" onclick="generate()" disabled>
-                Generate
+            <div class="group">
+                <input type="text" name="" class="in" id="rwyEndTwo" required oninput="validateTwo()">
+                    <span class="bar"></span>
+                    <label id="labelTwo">Rwy End Two</label>
+            </div>
+            <button id="genButton" class="button" onclick="createCentreLine()" data-text="Generate Centreline">
+                <span>Confirm</span>
             </button>
         </div>
     </div>
-    <div id="allOut" class="mdc-card hideBottom" onscroll="scroll()">
-        <div id="content-out" onscroll="scroll()">
-            <p class="mdc-typography--caption output-p" onscroll="scroll()">Output</p>
+    <div id="allOut" class="hideBottom">
+        <div id="content" class="smaller">
+            <p class="label" id="labelThree">Here is your output:</p>
+            <p id="out"></p>
         </div>
-        <!-- <button class="mdc-button returnSelectButton" onclick="returnToSide()">
-            Side selection
-        </button> -->
+        <button class="button" id="backButton" onclick="back()" data-text="Back">
+            <span>Sure?</span>
+        </button>
+        <button class="button" id="showButton" onclick="copy()" data-text="Copy to Clipboard">
+            <span>Sure?</span>
+        </button>
     </div>
 </body>
 </html>
