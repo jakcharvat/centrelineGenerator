@@ -1,16 +1,7 @@
 {
-  "name": "centrelinegenerator",
-  "version": "1.0.0",
-  "description": "Tool for generating coordinates for extended centrelines for openScope.",
   "scripts": {
     "start": "webpack-dev-server"
   },
-  "keywords": [
-    "example",
-    "heroku"
-  ],
-  "author": "jane-doe",
-  "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^8.6.3",
     "babel-core": "^6.26.3",
