@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node-sass main.scss bundle.css && webpack-dev-server"
+    "start": "webpack-dev-server"
   },
   "devDependencies": {
     "autoprefixer": "^8.6.3",
