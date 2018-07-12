@@ -1,5 +1,5 @@
 const autoprefixer = require('autoprefixer');
-module.exports = env = [{
+module.exports = process.env = [{
   devServer: {
     port: process.env.PORT || 8080
   },
