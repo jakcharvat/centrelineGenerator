@@ -1,5 +1,8 @@
 const autoprefixer = require('autoprefixer');
-module.exports = [{
+module.exports = env = [{
+  devServer: {
+    port: process.env.PORT || 8080
+  },
   entry: './app.scss',
   output: {
     // This is necessary for webpack to compile

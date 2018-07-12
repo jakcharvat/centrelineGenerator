@@ -2,9 +2,8 @@
   "name": "centrelinegenerator",
   "version": "1.0.0",
   "description": "Tool for generating coordinates for extended centrelines for openScope.",
-  "main": "bundle.js",
   "scripts": {
-    "start": "webpack-dev-server -p process.env.port"
+    "start": "webpack-dev-server"
   },
   "keywords": [
     "example",
