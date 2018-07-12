@@ -19,7 +19,6 @@ const item3Ripple = new MDCRipple(document.querySelector('.item3'));
 // const returnSelectRipple = new MDCRipple(document.querySelector('.returnSelectButton'));
 const select = new MDCSelect(document.querySelector('.mdc-select'));
 select.listen('change', () => {
-  alert('Selected option at index ' + select.selectedIndex + ' with value ' + select.value);
   document.querySelector('.generateButton').removeAttribute('disabled');
 });
 const topAppBarElement = document.querySelector('.mdc-top-app-bar');
