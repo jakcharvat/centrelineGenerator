@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server -p PORT"
   },
   "devDependencies": {
     "autoprefixer": "^8.6.3",
