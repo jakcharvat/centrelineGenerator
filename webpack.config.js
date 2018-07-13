@@ -1,4 +1,5 @@
 const autoprefixer = require('autoprefixer');
+var webpack = require('webpack');
 module.exports = process.env = [{
   devServer: {
     port: process.env.PORT || 8080
