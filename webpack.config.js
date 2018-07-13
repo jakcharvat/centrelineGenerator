@@ -40,7 +40,9 @@ module.exports = env = [{
     }]
   },
   plugins: [
-    new webpack.EnvironmentPlugin({ ...process.env })
+    new webpack.DefinePlugin({
+      'env.PORT': JSON.stringify(process.env.PORT)
+    }),
   ]
 }];
 
