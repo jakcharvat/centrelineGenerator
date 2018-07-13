@@ -1,6 +1,6 @@
 const autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
-var env = require('env.PORT');
+var env = Plugin('env.PORT');
 
 module.exports = env = [{
   target: 'node',
