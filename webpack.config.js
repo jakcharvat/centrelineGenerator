@@ -1,6 +1,6 @@
 const autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
-var env = require('env');
+var env = require(process.env);
 
 module.exports = env = [{
   devServer: {
