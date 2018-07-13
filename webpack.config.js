@@ -4,7 +4,7 @@ var webpack = require('webpack');
 module.exports = env = [{
   target: 'node',
   devServer: {
-    port: env.PORT || 8080
+    port: process.env.PORT
   },
   entry: './app.scss',
   output: {
