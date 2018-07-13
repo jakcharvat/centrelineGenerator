@@ -1,1 +1,1 @@
-web: bundle exec thin start -p $PORT
+web: webpack-dev-server -p $PORT
