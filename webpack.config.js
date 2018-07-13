@@ -2,6 +2,7 @@ const autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
 
 module.exports = env = [{
+  target: 'node',
   devServer: {
     port: env.PORT || 8080
   },
