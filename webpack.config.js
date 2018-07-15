@@ -1,12 +1,8 @@
 const autoprefixer = require('autoprefixer');
 var webpack = require('webpack');
-var env = Plugin('env.PORT');
 
 module.exports = env = [{
   target: 'node',
-  devServer: {
-    port: env.PORT || 8080
-  },
   entry: './app.scss',
   output: {
     // This is necessary for webpack to compile
@@ -40,11 +36,6 @@ module.exports = env = [{
       ]
     }]
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      'env.PORT': JSON.stringify(process.env.PORT)
-    }),
-  ]
 }];
 
 module.exports.push({
