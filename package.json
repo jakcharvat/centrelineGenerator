@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "webpack-dev-server index.js"
+    "start": "webpack-dev-server"
   },
   "devDependencies": {
     "autoprefixer": "^8.6.3",
