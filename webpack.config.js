@@ -1,12 +1,5 @@
 const autoprefixer = require('autoprefixer');
-const express = require('express');
-var webpack = require('webpack');
-const PORT = process.env.PORT;
-
-express().listen(PORT, () => console.log('Listening on port ' + PORT));
-
-module.exports = env = [{
-  target: 'node',
+module.exports = [{
   entry: './app.scss',
   output: {
     // This is necessary for webpack to compile
@@ -14,10 +7,6 @@ module.exports = env = [{
     filename: 'style-bundle.js',
   },
   module: {
-    devServer: {
-      inline: true,
-      port: PORT || 8080
-    },
     rules: [{
       test: /\.scss$/,
       use: [

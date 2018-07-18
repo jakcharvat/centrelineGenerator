@@ -29,10 +29,6 @@
     "@material/select": "^0.36.0",
     "@material/textfield": "^0.36.1",
     "@material/top-app-bar": "^0.36.1",
-    "@material/typography": "^0.35.0",
-    "express": "^4.16.3"
-  },
-  "engines": {
-    "node": "8.9.4"
+    "@material/typography": "^0.35.0"
   }
 }
