@@ -3049,7 +3049,6 @@ var item3Ripple = new _ripple.MDCRipple(document.querySelector('.item3'));
 // const returnSelectRipple = new MDCRipple(document.querySelector('.returnSelectButton'));
 var select = new _select.MDCSelect(document.querySelector('.mdc-select'));
 select.listen('change', function () {
-  alert('Selected option at index ' + select.selectedIndex + ' with value ' + select.value);
   document.querySelector('.generateButton').removeAttribute('disabled');
 });
 var topAppBarElement = document.querySelector('.mdc-top-app-bar');
