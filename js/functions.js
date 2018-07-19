@@ -49,11 +49,11 @@ function select() {
     catch (exception) {
         if (exception == "TypeError: Cannot read property 'includes' of undefined") {
             exception = "Please enter valid coordinates";
-            document.querySelector('#rwyEndOne').value = "";
-            document.querySelector('#rwyEndTwo').value = "";
-            document.querySelector('.continueButton').setAttribute('disabled', true);
         }
         alert(exception);
+        document.querySelector('#rwyEndOne').value = "";
+        document.querySelector('#rwyEndTwo').value = "";
+        disableButtonOne(); disableButtonTwo();
     }
 }
 
