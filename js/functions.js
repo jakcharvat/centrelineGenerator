@@ -291,10 +291,10 @@ function generate() {
         bearingTwo = bearingOneSave;
 
         var pointSave = [latOne, lonOne, latTwo, lonTwo];
-        latOne = pointSave[3];
-        lonOne = pointSave[4];
-        latTwo = pointSave[1];
-        lonTwo = pointSave[2];
+        latOne = pointSave[2];
+        lonOne = pointSave[3];
+        latTwo = pointSave[0];
+        lonTwo = pointSave[1];
     }
     console.log(sideChosen);
 
